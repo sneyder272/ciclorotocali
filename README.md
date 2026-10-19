@@ -95,15 +95,28 @@ pytest -q
 
 ## Fuentes de datos
 
+Catálogo normalizado: [`data/sources.csv`](data/sources.csv)
+
+Registro de auditoría: [`docs/audit.md`](docs/audit.md)
+
 Los conjuntos de datos se consultan en el portal de datos abiertos de Cali:
 
 - [Portal de datos abiertos de Cali](https://datos.cali.gov.co/)
 
-Registra para cada conjunto de datos su nombre exacto, enlace directo, fecha de consulta, período cubierto y condiciones de uso.
+| ID | Nombre | Enlace directo | Período | Condiciones |
+|---|---|---|---|---|
+| S01 | Cantidad de PQR por comuna | [CKAN](https://datos.cali.gov.co/dataset/de6fa620-eda6-47c8-97ae-bcbbed493fe1) | 2024 | CC-BY |
+| S02 | Proyectos de alumbrado público | [CKAN](https://datos.cali.gov.co/dataset/e6a3fd08-6a44-422f-beb7-d21ac1f38ec1) | 2014-2019 | CC-BY |
+| S03 | Intersecciones semaforizadas | [CKAN](https://datos.cali.gov.co/dataset/daa6cec4-3fe2-4a5e-8194-91d30c7fcbb3) | 2025 | CC-BY | Complementaria |
+| S04 | Recuperación malla vial | [CKAN](https://datos.cali.gov.co/dataset/a68cd30d-3be5-47b8-bb83-c6b85b86a5f6) | No especificado | CC-BY | Complementaria |
+| S05 | Puntos de Ventanilla Única | [CKAN](https://datos.cali.gov.co/dataset/a2120ceb-af52-480f-bf7c-8cad6a333cba) | 2025 | CC-BY | Complementaria |
+
+**Nota:** S03, S04 y S05 son fuentes complementarias. No se utilizan en el módulo activo (alumbrado).
 
 ## Licencias
 
-La licencia del código y las condiciones de reutilización de los datos deben documentarse por separado, respetando los términos de cada fuente.
+- **Código:** Pendiente de definir (recomendado: MIT o Apache 2.0).
+- **Datos:** CC-BY (Creative Commons Attribution). Atribución requerida: Alcaldía de Santiago de Cali / Secretaría correspondiente.
 
 ## Estado del proyecto
 
