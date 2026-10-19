@@ -6,11 +6,25 @@ import requests
 RAW_DIR = Path("data/raw")
 PROCESSED_DIR = Path("data/processed")
 
+def _leer_csv_inteligente(path: str) -> pd.DataFrame:
+    """Lee CSV detectando encoding automáticamente."""
+    raw = Path(path).read_bytes()
+    for enc in ['utf-8-sig', 'latin-1', 'utf-8']:
+        try:
+            txt = raw.decode(enc)
+            sep = ';' if txt.count(';') > txt.count(',') else ','
+            return pd.read_csv(path, encoding=enc, sep=sep, low_memory=False)
+        except (UnicodeDecodeError, Exception):
+            continue
+    # Último recurso
+    return pd.read_csv(path, encoding='latin-1', low_memory=False)
+
+
 def descargar_csv(url: str, nombre: str, timeout: int = 60) -> pd.DataFrame:
     """Descarga un CSV desde URL y lo guarda localmente."""
     path = RAW_DIR / nombre
     if path.exists():
-        return pd.read_csv(path, encoding='utf-8-sig', low_memory=False)
+        return _leer_csv_inteligente(path)
     
     r = requests.get(url, timeout=timeout)
     r.raise_for_status()
@@ -30,7 +44,7 @@ def descargar_csv(url: str, nombre: str, timeout: int = 60) -> pd.DataFrame:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(r.content)
     
-    return pd.read_csv(path, encoding=enc, sep=sep, low_memory=False)
+    return _leer_csv_inteligente(path)
 
 def cargar_por_comuna(query: str, nombre: str) -> pd.DataFrame:
     """Busca un dataset por query y descarga su primer CSV."""
