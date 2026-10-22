@@ -23,6 +23,15 @@ la ficha de metadatos de cada conjunto. Los CSV se descargaron antes de la
 suspensión (17 y 19 de octubre) y se incluyen en el repositorio para que el
 análisis siga siendo reproducible.
 
+## 1.1 Captura de la app
+
+| Archivo | Fecha | Qué muestra |
+|---|---|---|
+| [`app_home.png`](app_home.png) | 2026-10-22 | Vista real de `http://localhost:8501`: KPIs, aviso del cruce crítico y las cuatro pestañas |
+
+No es una captura de una fuente oficial; es evidencia de que la app renderiza
+con los CSV locales. La demostración en video debe grabarse en vivo.
+
 ## 2. Snapshots usados
 
 Los archivos de `data/raw/` son los insumos exactos del producto. Sus hashes

@@ -114,6 +114,7 @@ repository.
 
 Upload `video/portada_1500x1000.png` (3:2, recommended by Devpost).
 If you prefer the 16:9 version, use `portada_1280x720.png`.
+Optional gallery image: `docs/evidence/app_home.png` (real app capture).
 
 ## Final checklist
 

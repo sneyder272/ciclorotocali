@@ -10,6 +10,23 @@ verificar los datos y abrir la app sin pasos ocultos.
 - El workflow de CI apunta a Python **3.12**.
 - La app requiere Python **3.10 o superior**.
 
+## Verificación realizada
+
+El **2026-10-22** se clonó el repositorio en una carpeta nueva y se creó un
+`venv` desde cero:
+
+- Commit verificado: `9f1df47`.
+- Python 3.14.7; pandas 3.1.0; Streamlit 1.66.1; pytest 9.1.1.
+- `python scripts/verificar_checksums.py`: **3 archivos OK**.
+- `pytest -q`: **16 passed** en 45.86 s (primer arranque, sin caché).
+- `streamlit.testing.v1.AppTest`: **0 excepciones**, 4 pestañas, 3 tablas y 8
+  métricas.
+- Servidor limpio en el puerto 8503: health `ok` y página HTTP 200.
+
+La primera prueba se intentó dentro de `%TEMP%` y Windows Application Control
+bloqueó una DLL de pandas; al clonar fuera de `%TEMP%` pasó sin problemas. Es
+una política del equipo, no del repositorio.
+
 ## 1. Clonar e instalar
 
 ```bash
@@ -66,7 +83,7 @@ Salida esperada:
 
 ```text
 ................                                                         [100%]
-16 passed in ~15s
+16 passed in 15-50s
 ```
 
 Las pruebas cubren conteos exactos, normalización de direcciones, filtros,

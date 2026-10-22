@@ -9,6 +9,8 @@
 
 ![Portada de CicloRoto Vial](docs/cover.png)
 
+![Vista real de la app](docs/evidence/app_home.png)
+
 CicloRoto Vial procesa 51,236 registros de siniestros con lesionados (2016–2025)
 publicados por la Secretaría de Movilidad de Cali, consolida las direcciones en
 cruces reales y produce dos resultados:
