@@ -1,7 +1,5 @@
 # CicloRoto Vial
 
-[![tests](https://github.com/sneyder272/ciclorotocali/actions/workflows/tests.yml/badge.svg)](https://github.com/sneyder272/ciclorotocali/actions/workflows/tests.yml)
-
 **De la queja a la prioridad: dónde se lesiona la gente en Cali y qué no se puede verificar con los datos públicos.**
 
 > **Demo en 30 segundos:** abre la app, escribe `CL 70 & CRA 8`, mira los
