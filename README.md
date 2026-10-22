@@ -4,6 +4,13 @@
 
 **De la queja a la prioridad: dónde se lesiona la gente en Cali y qué no se puede verificar con los datos públicos.**
 
+> **Demo en 30 segundos:** abre la app, escribe `CL 70 & CRA 8`, mira los
+> **148 siniestros** de esa esquina y descarga la ficha con la solicitud lista
+> para radicar. La pestaña **Trazabilidad** muestra por qué **0 de 17,642**
+> reportes se pueden vincular a una obra publicada.
+
+![Portada de CicloRoto Vial](docs/cover.png)
+
 CicloRoto Vial procesa 51,236 registros de siniestros con lesionados (2016–2025)
 publicados por la Secretaría de Movilidad de Cali, consolida las direcciones en
 cruces reales y produce dos resultados:
