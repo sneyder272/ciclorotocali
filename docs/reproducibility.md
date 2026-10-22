@@ -15,10 +15,11 @@ verificar los datos y abrir la app sin pasos ocultos.
 El **2026-10-22** se clonó el repositorio en una carpeta nueva y se creó un
 `venv` desde cero:
 
-- Commit verificado: `9f1df47`.
+- Commit verificado: `f9cb0a0`.
 - Python 3.14.7; pandas 3.1.0; Streamlit 1.66.1; pytest 9.1.1.
 - `python scripts/verificar_checksums.py`: **3 archivos OK**.
-- `pytest -q`: **16 passed** en 45.86 s (primer arranque, sin caché).
+- `pytest -q`: **16 passed** en 10.03 s (segunda ejecución; 45.86 s en el
+  primer arranque del venv, sin caché).
 - `streamlit.testing.v1.AppTest`: **0 excepciones**, 4 pestañas, 3 tablas y 8
   métricas.
 - Servidor limpio en el puerto 8503: health `ok` y página HTTP 200.
