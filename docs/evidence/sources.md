@@ -23,14 +23,19 @@ la ficha de metadatos de cada conjunto. Los CSV se descargaron antes de la
 suspensión (17 y 19 de octubre) y se incluyen en el repositorio para que el
 análisis siga siendo reproducible.
 
-## 1.1 Captura de la app
+## 1.1 Capturas de la app
 
 | Archivo | Fecha | Qué muestra |
 |---|---|---|
 | [`app_home.png`](app_home.png) | 2026-10-22 | Vista real de `http://localhost:8501`: KPIs, aviso del cruce crítico y las cuatro pestañas |
+| [`app_buscar.png`](app_buscar.png) | 2026-10-22 | Búsqueda `CL 70 & CRA 8` con el resultado del cruce crítico |
+| [`app_ficha.png`](app_ficha.png) | 2026-10-22 | Ficha del cruce y solicitud lista para radicar |
+| [`app_trazabilidad.png`](app_trazabilidad.png) | 2026-10-22 | Aviso `0 de 17,642` y tabla de diagnóstico PQR–alumbrado |
+| [`app_metodo.png`](app_metodo.png) | 2026-10-22 | Fuentes, modelo y límites declarados |
 
-No es una captura de una fuente oficial; es evidencia de que la app renderiza
-con los CSV locales. La demostración en video debe grabarse en vivo.
+No son capturas de fuentes oficiales; son evidencia de que la app renderiza
+con los CSV locales. Se generan con `python video/capturas_app.py` y la
+grabación de pantalla del video también es real.
 
 ## 2. Snapshots usados
 

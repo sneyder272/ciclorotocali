@@ -2,3 +2,9 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
+video/_clips/
+video/_frames*/
+video/_check_*.png
+video/video_final.mp4
+video/narracion.wav
+docs/evidence/pw_*.png

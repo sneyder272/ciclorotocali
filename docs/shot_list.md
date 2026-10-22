@@ -1,7 +1,9 @@
 # Tomas y montaje del video
 
-**Objetivo:** 3:45–4:10, 1920 × 1080, 30 fps, MP4 H.264.
+**Objetivo:** 3:34 en el corte automatizado actual, 1920 × 1080, 30 fps, MP4 H.264.
 **Voz:** `es-CO-GonzaloNeural` (3:26) o `es-CO-SalomeNeural` (3:52).
+**Corte ya generado:** `video/video_final.mp4`, creado por `video/grabar_video.py`.
+Esta tabla sirve para rehacerlo a mano si se prefiere.
 **Regla:** la pantalla debe ser una grabación real de la app; no se simulan
 resultados ni se editan cifras.
 
@@ -29,7 +31,8 @@ resultados ni se editan cifras.
 | 8 | `06_cierre.mp4` | `06_cierre.mp3` | 3:05 | 25.9 s | **Datos y método**; tabla de fuentes; cortar a GitHub (README); cortar a terminal con `pytest -q` y **16 passed**; volver al título |
 | 9 | `07_creditos.mp4` | `07_creditos.mp3` | 3:33 | 10.0 s | Portada; rótulo **Narración con IA (edge-tts)**; “Código MIT · Datos CC-BY” y URL del repo |
 
-Deja **1–2 s de silencio** entre clips. El corte final queda en **3:45–4:00**.
+Deja **1–2 s de silencio** entre clips. El corte automatizado queda en **3:34**;
+con pausas manuales más largas puede llegar a **3:45–4:00**.
 Si usas la voz de Salomé, los inicios se corren ~25 s; conserva el orden y los
 silencios.
 

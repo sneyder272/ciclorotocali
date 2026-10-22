@@ -1,6 +1,6 @@
 # Guion del video — CicloRoto Vial
 
-**Duración objetivo:** 3:45–4:15 (límite: 6:00)
+**Duración objetivo:** 3:34 en el corte actual (límite: 6:00)
 **Formato:** 1920×1080, 30 fps, MP4 H.264
 **Voz:** narración sintética en español colombiano (`edge-tts`), sin rostro ni avatar. Se declara como IA en el video y en la submission.
 **Regla:** cada cifra que se dice existe en la app o en `docs/audit.md`.

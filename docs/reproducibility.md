@@ -150,6 +150,7 @@ las mismas pruebas se pueden correr localmente con los pasos de arriba.
 ## 9. Qué no se reproduce
 
 - La consulta a `datos.cali.gov.co` falla mientras dure la suspensión.
-- El video requiere grabar la pantalla; el material de `video/` solo aporta
-  portadas, textos y narración.
+- El video final no se versiona por tamaño, pero se puede regenerar con
+  `python video/grabar_video.py` (Playwright + ffmpeg) siguiendo
+  [`video/LEEME.md`](../video/LEEME.md). La grabación es de la app real.
 - No se incluyen correos, tokens ni credenciales.

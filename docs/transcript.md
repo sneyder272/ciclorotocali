@@ -4,7 +4,8 @@
 (`es-CO-GonzaloNeural`, velocidad −5 %). Se identifica en el video y en la
 postulación.
 
-**Duración de la narración:** 3:26. Con pausas de montaje: 3:50–4:20.
+**Duración de la narración:** 3:26. **Corte final actual:** 3:34 (portada,
+demo y créditos incluidos).
 
 ---
 

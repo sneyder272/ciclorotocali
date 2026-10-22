@@ -25,8 +25,9 @@ verificar con los datos públicos.
 | **Video** | Pegar el enlace de YouTube (2–6 min) |
 | **Full description** | Copiar desde “El problema y cómo sabemos que es real” hasta “Nota de honestidad” |
 
-**Importante:** el video debe mostrar la app funcionando. El guion está en
-`docs/video_script.md` y dura 4:30–5:00.
+**Importante:** el video debe mostrar la app funcionando. El corte actual dura
+**3:34** (`video/video_final.mp4`, no versionado por tamaño) y se genera con
+`video/grabar_video.py`; el guion está en `docs/video_script.md`.
 
 ## El problema y cómo sabemos que es real
 

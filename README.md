@@ -177,9 +177,11 @@ Auditoría y descartes en [`docs/audit.md`](docs/audit.md).
 - Transcripción: [`docs/transcript.md`](docs/transcript.md).
 - Copy para Devpost: [`docs/devpost_form.md`](docs/devpost_form.md).
 
-La narración es sintética (`edge-tts`) y se declara en la submission. La
-grabación de pantalla debe ser real; el material de `video/` no sustituye la
-demo.
+La narración es sintética (`edge-tts`) y se declara en la submission. El corte
+`video/video_final.mp4` (**3:34**, 1080p) se genera con
+`video/grabar_video.py`, que graba la app real; el MP4 no se versiona por
+tamaño. La grabación debe ser real: no se simulan resultados ni se editan
+cifras.
 
 ## Reproducibilidad
 

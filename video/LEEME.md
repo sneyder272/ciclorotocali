@@ -1,16 +1,30 @@
 # Video de CicloRoto Vial
 
 Esta carpeta contiene todo lo necesario para montar el video sin hablar:
-portadas, textos, narraciones sintéticas y los scripts que las generan. La
-grabación de pantalla debe ser real; los MP3 solo aportan la voz.
+portadas, textos, narraciones sintéticas, capturas y los scripts que las
+generan. La grabación de pantalla debe ser real; los MP3 solo aportan la voz.
+
+## Corte actual
+
+- `video/video_final.mp4`: **3:34**, 1920 × 1080, 30 fps, H.264/AAC.
+- Voz: `es-CO-GonzaloNeural` (narración de 3:26; el resto son pausas).
+- Incluye portada, demo real de la app, GitHub y créditos con el rótulo
+  **Narración con IA (edge-tts)**.
+- El MP4 está en `.gitignore` por tamaño; se sube a YouTube y se pega el enlace
+  en Devpost. El repositorio conserva el script y los materiales para
+  regenerarlo.
 
 ## Contenido
 
 ```text
 video/
 ├── LEEME.md
+├── grabar_video.py               # graba la app real y monta el MP4
+├── capturas_app.py               # capturas limpias de la app para difusión
+├── requirements-video.txt        # Playwright, ffmpeg y Pillow (opcional)
 ├── generar_narracion.py          # regenera textos y MP3 con edge-tts
 ├── generar_portada.py            # regenera portadas con Pillow (Windows)
+├── creditos.png                  # tarjeta final con la declaración de IA
 ├── textos/                       # texto exacto de cada escena
 ├── es-CO-GonzaloNeural/          # voz masculina, 3:26 en total
 ├── es-CO-SalomeNeural/           # voz femenina, 3:52 en total
@@ -36,7 +50,37 @@ video/
 Escucha las dos y elige. Gonzalo suena más neutro; Salomé, más cálida. No hace
 falta usar la voz del autor.
 
-## Montaje
+## Opción A: regenerar el corte automático
+
+```bash
+pip install -r video/requirements-video.txt
+python -m playwright install chromium
+python -m streamlit run app.py --server.port 8501
+# En otra terminal:
+python video/grabar_video.py
+```
+
+El script:
+
+1. Comprueba que `http://localhost:8501/_stcore/health` responda `ok`.
+2. Graba la app real con Playwright en 1920 × 1080, sin barra de Streamlit.
+3. Sigue el orden de las escenas y monta la narración con pausas de 1 s.
+4. Añade portada, créditos y el rótulo de narración con IA.
+5. Escribe `video/video_final.mp4` (no se versiona).
+
+No abre correo, notificaciones ni pestañas personales. Revisa el corte antes de
+subirlo: los tiempos de cambio de pestaña dependen de la velocidad del equipo.
+
+Para rehacer las capturas de la app:
+
+```bash
+python video/capturas_app.py
+```
+
+Genera `docs/evidence/app_home.png`, `app_buscar.png`, `app_ficha.png`,
+`app_trazabilidad.png` y `app_metodo.png`.
+
+## Opción B: montaje manual
 
 1. Sigue la tabla de tomas de [`../docs/shot_list.md`](../docs/shot_list.md).
 2. Graba la pantalla **sin audio** (OBS, Clipchamp o Win+G), en 1080p y 30 fps.
@@ -78,3 +122,5 @@ ya están incluidas; no es necesario regenerarlas para el video.
 - El uso de IA está permitido, pero **debe declararse**.
 - No inventes una demo: la grabación debe ser de la app real.
 - No muestres correos, nombres, cédulas, tokens ni notificaciones personales.
+- El video no reemplaza la reproducibilidad: el jurado puede clonar el repo y
+  correr `pytest -q` y `python scripts/verificar_checksums.py`.

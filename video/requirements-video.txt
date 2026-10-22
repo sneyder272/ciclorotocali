@@ -1,0 +1,11 @@
+# Dependencias opcionales para generar el video.
+# La app principal solo necesita requirements.txt.
+-r requirements.txt
+
+playwright>=1.50,<2.0
+imageio-ffmpeg>=0.5,<1.0
+pillow>=10,<13
+
+# Solo si vas a regenerar la narración con generar_narracion.py:
+edge-tts>=7.0,<8.0
+mutagen>=1.47,<2.0
