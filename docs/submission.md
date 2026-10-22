@@ -10,6 +10,32 @@ Convierte 51,236 siniestros viales de Cali en un ranking de cruces críticos y e
 una solicitud lista para radicar. Y muestra, sin inventar, qué no se puede
 verificar con los datos públicos.
 
+## El problema y cómo sabemos que es real
+
+**El problema:** en Cali, un vecino puede saber que su esquina es peligrosa,
+pero no puede verificar si la ciudad intervino allí. La información existe en
+tres conjuntos públicos que no se pueden cruzar: los siniestros tienen
+dirección textual, las obras tienen comuna y año, y los reportes ciudadanos no
+tienen categoría de alumbrado ni identificador de caso.
+
+**Cómo lo sabemos (datos, no suposiciones):**
+
+- **51,236 siniestros con lesionados** publicados por la Secretaría de Movilidad
+  (2016–2025). Es un registro público, descargable y verificable.
+- Solo **28,411 (55.5 %)** tienen una dirección que se puede resolver a un
+  cruce. En **2018, 2019 y 2020** el 100 % de las direcciones está vacío
+  (`"."`): 16,616 filas sin ubicación.
+- **247 proyectos de alumbrado** (2017) y **17,642 PQR** (2024–2025) no
+  comparten clave, fecha por registro ni identificador de caso. Al cruzarlos,
+  **0 son vinculables**.
+- El cruce **Calle 70 con Carrera 8** acumula **148 siniestros con lesionados**;
+  el 41 % involucra motocicleta y el 13 %, peatón.
+
+No realizamos entrevistas ni validaciones de campo que no podamos demostrar.
+La evidencia es el propio dato abierto, su cobertura y sus vacíos. Por eso el
+producto no afirma que falte una obra: hace visible que **no es verificable**
+con lo publicado.
+
 ## Inspiración
 
 Cali publica los siniestros viales con la dirección en texto. También publica
