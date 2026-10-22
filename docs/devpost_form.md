@@ -75,6 +75,8 @@ We also learned to keep code and data licenses separate: MIT for the code, CC-BY
 - PQR: 17,642 records, 2024–2025, CC-BY, consulted 2026-10-19.
 
 **Honesty note:** an unmatched request does not prove that the problem is unresolved. The ranking does not prove that an intervention is missing, and it does not establish causation. A record is a crash, not a person.
+
+**Source status (2026-10-22):** the city portal returned an official notice of temporary suspension of web services for security reasons (dated 2026-10-21). The raw CSVs used here were downloaded on 2026-10-17 and 2026-10-19, before the suspension, and are included in the repository with SHA-256 checksums. Captures: `docs/evidence/sources.md`.
 ```
 
 ## Built with
@@ -110,7 +112,7 @@ repository.
 
 ## Media
 
-Upload `video_cicloroto/portada_1500x1000.png` (3:2, recommended by Devpost).
+Upload `video/portada_1500x1000.png` (3:2, recommended by Devpost).
 If you prefer the 16:9 version, use `portada_1280x720.png`.
 
 ## Final checklist

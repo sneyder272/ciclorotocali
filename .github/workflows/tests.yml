@@ -16,5 +16,7 @@ jobs:
           cache: pip
       - name: Instalar dependencias
         run: pip install -r requirements-dev.txt
+      - name: Verificar checksums
+        run: python scripts/verificar_checksums.py
       - name: Ejecutar pruebas
         run: pytest -q

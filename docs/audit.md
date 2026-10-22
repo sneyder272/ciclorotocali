@@ -125,3 +125,15 @@ reportes sin intervención), que no deben usarse.
 - Datos: **CC-BY**, Alcaldía de Santiago de Cali / dependencia responsable.
 - Código: **MIT** (ver `LICENSE`).
 - La licencia de los datos no cubre el código ni viceversa.
+
+## 4. Estado del portal y snapshots
+
+El **2026-10-22** las tres URLs de datos.cali.gov.co devolvieron un comunicado
+oficial de **suspensión temporal de servicios web por medidas de seguridad**
+(fechado 2026-10-21). No se descargaron datos nuevos después del 2026-10-19.
+
+Los CSV usados se descargaron el 2026-10-17 (V01) y el 2026-10-19 (A01, A02),
+antes de la suspensión. Están incluidos en data/raw/ con SHA-256 en
+docs/evidence/checksums.sha256; las capturas y el detalle están en
+docs/evidence/sources.md.
+

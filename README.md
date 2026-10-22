@@ -135,6 +135,13 @@ cicloroto/
 
 ## Fuentes
 
+> **Estado del portal (2026-10-22):** las tres URLs de `datos.cali.gov.co`
+> devolvieron un comunicado oficial de **suspensión temporal de servicios web
+> por medidas de seguridad** (fechado 2026-10-21). Los CSV se descargaron el
+> 17 y el 19 de octubre, antes de la suspensión, y están incluidos en el
+> repositorio con SHA-256. Capturas y detalle:
+> [`docs/evidence/sources.md`](docs/evidence/sources.md).
+
 | ID | Conjunto | Registros | Período | Enlace | Licencia |
 |---|---|---:|---|---|---|
 | V01 | Lesionados en accidentes de tránsito | 51,236 | 2016–2025 | [CKAN](https://datos.cali.gov.co/dataset/75c089ba-7df3-4816-b80f-c69c6e5362ae) | CC-BY |
@@ -159,6 +166,38 @@ Auditoría y descartes en [`docs/audit.md`](docs/audit.md).
   verificación y qué no se puede comprobar con lo publicado.
 - `0 reportes vinculables` significa "no verificable con estas fuentes", no
   "problema sin resolver".
+
+## Video y material
+
+- Guion y tomas: [`docs/video_script.md`](docs/video_script.md) y
+  [`docs/shot_list.md`](docs/shot_list.md).
+- Portadas, textos y narraciones sintéticas: [`video/`](video/).
+- Transcripción: [`docs/transcript.md`](docs/transcript.md).
+- Copy para Devpost: [`docs/devpost_form.md`](docs/devpost_form.md).
+
+La narración es sintética (`edge-tts`) y se declara en la submission. La
+grabación de pantalla debe ser real; el material de `video/` no sustituye la
+demo.
+
+## Reproducibilidad
+
+Desde un clon limpio:
+
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt -r requirements-dev.txt
+pytest -q
+python scripts/verificar_checksums.py
+python -m streamlit run app.py
+```
+
+Resultado esperado: **16 passed**; los tres CSV deben imprimir `OK`; la app
+responde `ok` en `http://localhost:8501/_stcore/health`. Los CSV están
+normalizados a LF con `.gitattributes`, así que los hashes son iguales en
+Windows, Linux y macOS. Guía completa:
+[`docs/reproducibility.md`](docs/reproducibility.md).
 
 ## Licencias
 

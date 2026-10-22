@@ -1,0 +1,1 @@
+El proyecto es reproducible: los CSV están en el repositorio, la app corre sin internet y 16 pruebas verifican los conteos, la normalización y la ficha. No usamos datos inventados ni afirmamos causalidad. El ranking dice dónde priorizar. La ficha dice qué preguntar. CicloRoto Vial: de la queja a la prioridad. Repositorio y demo en el enlace de la submission.

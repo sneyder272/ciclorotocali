@@ -1,0 +1,1 @@
+El problema tiene dos capas. Primero, la información existe pero está dispersa: direcciones escritas de mil formas, sin coordenadas, y tres años completos sin dirección. Segundo, aunque un vecino sepa que su esquina es peligrosa, no puede verificar si pidió una obra, si se ejecutó o si existe un estudio de seguridad vial. No es que no haya datos: es que no se pueden cruzar.

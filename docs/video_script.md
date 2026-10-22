@@ -1,8 +1,8 @@
 # Guion del video — CicloRoto Vial
 
-**Duración objetivo:** 4:30–5:00 (límite: 6:00)
+**Duración objetivo:** 3:45–4:15 (límite: 6:00)
 **Formato:** 1920×1080, 30 fps, MP4 H.264
-**Voz:** propia, en español. Sin avatar de IA.
+**Voz:** narración sintética en español colombiano (`edge-tts`), sin rostro ni avatar. Se declara como IA en el video y en la submission.
 **Regla:** cada cifra que se dice existe en la app o en `docs/audit.md`.
 
 ---
@@ -13,14 +13,15 @@
 - [ ] Navegador en 125–150 % de zoom para que el texto se lea en 1080p.
 - [ ] Barra de marcadores oculta; pestañas solo con la app y el repositorio.
 - [ ] App abierta en `http://localhost:8501`, pestaña **Buscar mi esquina**.
-- [ ] Ensayar una vez con cronómetro. Si pasa de 5:30, recortar la sección de método.
-- [ ] Grabar audio aparte o con micrófono, no con el altavoz.
+- [ ] Ensayar una vez con cronómetro. Si pasa de 4:30, recortar la sección de método.
+- [ ] Grabar el video **sin audio**; la narración se monta después.
 - [ ] Revisar que no aparezca ningún nombre, cédula ni correo real.
 
-**Si no quieres hablar:** la narración ya está generada con voz sintética en
-`video_cicloroto/` (dos voces, cortes por escena). Instrucciones de montaje en
-`video_cicloroto/LEEME.md` y transcripción en `docs/transcript.md`. Agrega el
-rótulo **“Narración con IA”** y dilo en la descripción de la submission.
+**Narración ya generada:** no necesitas hablar. Hay dos voces sintéticas en
+`video/` (cortes por escena). Instrucciones de montaje en
+`video/LEEME.md` y transcripción en `docs/transcript.md`. Agrega el
+rótulo **“Narración con IA (edge-tts)”** y dilo en la descripción de la
+submission.
 
 ---
 

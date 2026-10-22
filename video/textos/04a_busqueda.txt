@@ -1,0 +1,1 @@
+Voy a buscar mi esquina. Escribo CL 70 y CRA 8. La app la reconoce y la convierte en Calle 70 con Carrera 8: la misma esquina, escrita de otra forma.
