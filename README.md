@@ -1,5 +1,7 @@
 # CicloRoto Vial
 
+[![tests](https://github.com/sneyder272/ciclorotocali/actions/workflows/tests.yml/badge.svg)](https://github.com/sneyder272/ciclorotocali/actions/workflows/tests.yml)
+
 **De la queja a la prioridad: dónde se lesiona la gente en Cali y qué no se puede verificar con los datos públicos.**
 
 CicloRoto Vial procesa 51,236 registros de siniestros con lesionados (2016–2025)
@@ -46,6 +48,23 @@ Top 5 de cruces:
 | 4 | Calle 34 con Carrera 1 | 107 | 45.8% |
 | 5 | Calle 70 con Carrera 28D | 99 | 45.5% |
 
+## Impacto y uso
+
+Tres perfiles usan el mismo resultado:
+
+1. **Un vecino** busca su esquina, entiende el riesgo y descarga una ficha con
+   una solicitud lista para radicar.
+2. **Una autoridad o un periodista** usa el ranking y el CSV para priorizar
+   entre **1,228 cruces** con al menos 5 registros, en lugar de elegir por
+   percepción.
+3. **Una organización comunitaria** usa el hallazgo de “0 vinculables” para
+   pedir que las obras se publiquen con dirección, fecha e identificador de
+   caso.
+
+El objetivo no es reemplazar una auditoría vial ni probar causalidad. Es
+convertir un dato disperso en una pregunta verificable. Ver
+[`docs/impact.md`](docs/impact.md).
+
 ## Cómo funciona
 
 ```text
@@ -82,9 +101,10 @@ python -m streamlit run app.py
 Los CSV están incluidos en `data/raw/`. La aplicación **no necesita internet**
 para abrirse.
 
-Pruebas:
+Pruebas (dependencias de desarrollo):
 
 ```bash
+pip install -r requirements-dev.txt
 pytest -q
 ```
 

@@ -127,6 +127,19 @@ esa brecha en lugar de rellenarla con una suposición.
 - Un flujo completo en menos de 30 segundos: escribir la esquina → ver el
   riesgo → descargar la ficha → radicar la solicitud.
 
+## Impacto a escala
+
+- **Un vecino** obtiene en 30 segundos el conteo de su esquina y una solicitud
+  lista para radicar.
+- **Una autoridad o un periodista** obtiene 1,228 cruces priorizados y un CSV
+  reproducible, en lugar de elegir por percepción.
+- **Una organización** obtiene evidencia para pedir que las obras se publiquen
+  con dirección, fecha e identificador de caso.
+
+El piloto no necesita servidores: corre en un computador con Python y los CSV
+del repositorio. El siguiente paso es institucional, no técnico: conseguir que
+la ciudad publique intervenciones vinculables.
+
 ## Qué aprendimos
 
 Que el dato más valioso de un proyecto cívico no siempre es el que responde una
@@ -156,6 +169,7 @@ la Alcaldía de Santiago de Cali.
 - Repositorio: https://github.com/sneyder272/ciclorotocali
 - Demo local: `python -m streamlit run app.py` → `http://localhost:8501`
 - Metodología y auditoría: `docs/audit.md`
+- Impacto y teoría de cambio: `docs/impact.md`
 - Guion del video: `docs/video_script.md`
 
 ## Uso de IA

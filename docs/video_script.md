@@ -26,7 +26,9 @@ rótulo **“Narración con IA”** y dilo en la descripción de la submission.
 
 ## 0:00 – 0:25 · Gancho
 
-**Pantalla:** título de la app, luego la tabla de cruces críticos.
+**Pantalla:** título y tabla (3 s). Cortar a **Buscar mi esquina**, escribir
+`CL 70 & CRA 8` y mostrar el resultado de **148** mientras termina el gancho.
+Así el producto se entiende en los primeros 20 segundos.
 
 > En Cali se registraron **51,236 siniestros con lesionados** entre 2016 y 2025.
 > La ciudad publica la dirección de cada uno, aunque solo el **55 %** se puede
