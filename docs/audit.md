@@ -1,102 +1,127 @@
-# Registro de auditoría de datos — CicloRoto
+# Auditoría de datos — CicloRoto Vial
 
-**Fecha de consulta:** 2026-10-19
-**Módulo:** Alumbrado público
+**Consulta:** 2026-10-17 (V01) y 2026-10-19 (A01, A02)
+**Fuente principal:** Secretaría de Movilidad de Cali, conjunto V01.
 
-## 1. Descarga
+## 1. Módulo vial (producto principal)
 
-| Fuente | Líneas del archivo | Filas de datos | Nota |
-|---|---|---|---|
-| S01: PQR por comuna | 17,643 | **17,642** | Una línea de encabezado. |
-| S02: Proyectos de alumbrado | 253 | **251** | Una línea de título (`... AÑO 2017`) y una de encabezado. |
+### 1.1 Descarga y volumen
 
-## 2. Procesamiento
+| Concepto | Valor |
+|---|---:|
+| Filas del archivo | 51,236 |
+| Columnas | 10 |
+| Encoding | latin-1 |
+| Separador | `;` |
+| Rango de fechas | 2016-01-01 a 2025-12-09 |
+| Filas sin fecha válida | 166 (0.3%) |
 
-| Fuente | Filas de datos | Filas usadas | Descartadas | Causa |
-|---|---|---|---|---|
-| S01: PQR | 17,642 | 17,642 | 0 | Se conservan todas; las fechas inválidas se marcan, no se borran. |
-| S02: Alumbrado | 251 | 247 | 4 | Sin comuna válida (1–22). |
+Las 166 filas sin fecha se conservan en el total, pero no entran en las series
+por año.
 
-### Detalle de las 4 filas descartadas (S02)
+### 1.2 Direcciones
 
-| Métrica | Valor |
-|---|---|
-| Puntos luminosos no contabilizados | 39 |
-| Inversión no contabilizada (COP) | 55.907.038 |
+| Concepto | Valor |
+|---|---:|
+| Registros con dirección resoluble a cruce | **28,411** |
+| Porcentaje | **55.5%** |
+| Cruces distintos | **9,261** |
+| Cruces con 5 o más registros | **1,228** |
 
-Las filas se descartan del análisis territorial porque no es posible
-asignarlas a una comuna. No se imputan valores.
+Cobertura por año:
 
-### Fechas inválidas en S01
+| Año | Registros | Con cruce | Cobertura |
+|---|---:|---:|---:|
+| 2016 | 8,215 | 7,568 | 92.1% |
+| 2017 | 6,985 | 4,429 | 63.4% |
+| 2018 | 6,475 | 0 | **0.0%** |
+| 2019 | 5,974 | 0 | **0.0%** |
+| 2020 | 4,167 | 0 | **0.0%** |
+| 2021 | 4,175 | 2,624 | 62.9% |
+| 2022 | 4,131 | 3,721 | 90.1% |
+| 2023 | 3,963 | 3,573 | 90.2% |
+| 2024 | 4,126 | 3,845 | 93.2% |
+| 2025 | 2,859 | 2,499 | 87.4% |
 
-| Situación | Registros |
-|---|---|
-| Sin fecha | 17 |
-| Año fuera de 2024–2025 (2005, 2026, 2027, 2028, 2205) | 11 |
-| **Total sin período válido** | **28** |
+**Hallazgo:** 2018, 2019 y 2020 tienen la dirección vacía (`"."`) en el 100% de
+los registros. Son 16,616 filas que no pueden ubicarse en un cruce. El ranking
+se apoya en 2016, 2017 y 2021–2025, y así se declara en la aplicación.
 
-Estos 28 registros permanecen en el conteo total (17,642) pero no entran en
-los agregados por período.
+### 1.3 Normalización aplicada
 
-### Comunas sin dato en S01
+- Mayúsculas y eliminación de puntuación final.
+- Abreviaturas: `CRA`/`CARR`/`KR` → `CARRERA`; `CL`/`CLL` → `CALLE`;
+  `AV`/`AVDA` → `AVENIDA`; `TRANS`/`TV` → `TRANSVERSAL`;
+  `DIAG`/`DG` → `DIAGONAL`.
+- Separadores: `CON`, `Y`, `&`, `/`, `ESQUINA` y formato sin conector
+  (`CALLE 25 CARRERA 109`).
+- Se ordenan las dos vías alfabéticamente, de modo que
+  `CARRERA 8 CON CALLE 70` y `CALLE 70 CON CARRERA 8` cuentan como el mismo
+  cruce.
+- Se descartan direcciones que no contienen dos vías (clínicas, CAI, `"."`).
 
-| Situación | Registros | Porcentaje |
-|---|---|---|
-| Comuna `N/D` | 2,673 | 15.1% |
+### 1.4 Top 5 de cruces
 
-Las variantes `Comuna 20`, `COMUNA 20` y `20` se normalizan a `Comuna 20`.
-Sin esa normalización la fuente reporta 83 valores distintos; tras normalizar
-quedan 22 comunas y `N/D`.
+| # | Cruce | Registros | % moto | % peatón | Ventana pico |
+|---:|---|---:|---:|---:|---|
+| 1 | Calle 70 con Carrera 8 | 148 | 41.2% | 12.8% | 16:00–18:59 |
+| 2 | Carrera 23 con Transversal 25 | 125 | 46.4% | 3.2% | 08:00–10:59 |
+| 3 | Calle 70 con Carrera 1 | 118 | 39.8% | 3.4% | 13:00–15:59 |
+| 4 | Calle 34 con Carrera 1 | 107 | 45.8% | 5.6% | 14:00–16:59 |
+| 5 | Calle 70 con Carrera 28D | 99 | 45.5% | 2.0% | 16:00–18:59 |
 
-## 3. Cifras verificadas
+### 1.5 Modelo
 
-| Métrica | Valor |
-|---|---|
-| PQR totales | 17,642 |
-| PQR de 2024 | 11,873 |
-| PQR de 2025 | 5,741 |
-| Proyectos de alumbrado (2017) | 247 |
-| Puntos luminosos registrados | 3,686 |
-| Inversión registrada (COP) | 1.862.820.659 |
-| Comunas con proyecto en 2017 | 12 de 22 |
-| Reportes vinculables a una obra | **0** |
+- **Gamma-Poisson (empirical Bayes).** La previa se estima por momentos sobre
+  los conteos de los cruces con al menos 5 registros.
+- La media posterior es `(α + y) / (β + 1)`; el intervalo del 95% se aproxima
+  con la desviación de la posterior.
+- **No corrige por exposición** (volumen de tráfico), porque no está publicado.
+  El ranking ordena por conteo ajustado; el intervalo comunica la incertidumbre.
+- Un registro es un siniestro, no una persona. Los flags de víctima pueden
+  faltar, así que los porcentajes son sobre registros, no sobre víctimas únicas.
 
-## 4. Por qué el cruce no es posible
+### 1.6 Ficha y solicitud
+
+La ficha por cruce se genera con los datos del propio cruce y una solicitud de
+información basada en la Ley 1755 de 2015. **No afirma que falte una obra**:
+pide la información que permitiría verificarlo.
+
+## 2. Módulo de alumbrado (capa de trazabilidad)
+
+### 2.1 Volumen
+
+| Fuente | Líneas | Filas de datos | Usadas | Descartadas |
+|---|---:|---:|---:|---:|
+| A01 Alumbrado | 253 | 251 | 247 | 4 sin comuna válida |
+| A02 PQR | 17,643 | 17,642 | 17,642 | 0 |
+
+### 2.2 Por qué no se puede vincular
 
 | Criterio | Estado | Detalle |
 |---|---|---|
-| Clave territorial común | Parcial | Normalizable a `Comuna 1`–`Comuna 22`; no hay clave de caso. |
-| Solapamiento temporal | **No** | PQR 2024-01 a 2025-11; alumbrado 2017. Meses en común: 0. |
-| Fecha por registro en alumbrado | **No** | El año solo aparece en el título del archivo. |
-| Categoría temática en PQR | **No** | Las clases son `Pqr`, `Cita médica`, `Denuncia`, `Urgencias`, etc. Ninguna identifica alumbrado. |
-| Identificador de caso | **No** | Ninguna fuente publica un número de caso. |
+| Clave territorial común | Parcial | Normalizable a `Comuna 1`–`Comuna 22`; no hay clave de caso |
+| Solapamiento temporal | **No** | PQR 2024-01 a 2025-11; alumbrado 2017 |
+| Fecha por registro en alumbrado | **No** | El año solo figura en el título del archivo |
+| Categoría temática en PQR | **No** | `Pqr`, `Cita médica`, `Denuncia`, etc. |
+| Identificador de caso | **No** | Ninguna fuente lo publica |
 
-**Conclusión:** `0 reportes vinculables` significa que la vinculación **no es
-verificable con las fuentes públicas consultadas**. No significa que las obras
-no existan ni que los reportes no hayan sido atendidos.
+**Conclusión:** `0 reportes vinculables` significa "no verificable con estas
+fuentes", no "problema sin resolver".
 
-## 5. Corrección respecto a versiones anteriores
+### 2.3 Corrección de una versión anterior
 
-La primera versión del módulo calculaba el período del alumbrado a partir de
-la columna `tipo` (valores `VIAS`, `CPL`, `ZONA VERDE`, etc.). Esa columna no
-contiene fechas: todas las filas quedaban sin período y el agrupamiento las
-descartaba, produciendo cifras de "brecha" que eran un artefacto del código.
-También se afirmaba que el alumbrado cubría 2014–2019; el archivo corresponde
-a **2017**, según su título.
+La primera versión calculaba el período del alumbrado desde la columna `tipo`
+(`VIAS`, `CPL`, `ZONA VERDE`). Esa columna no contiene fechas: todas las filas
+quedaban sin período, el agrupamiento las descartaba y producía cifras de
+"brecha" que eran un artefacto. También se afirmaba que el alumbrado cubría
+2014–2019; el archivo corresponde a **2017**.
 
 Las cifras de esta versión reemplazan a las anteriores (748 brechas y 17,625
 reportes sin intervención), que no deben usarse.
 
-## 6. Fuentes complementarias (no usadas en el módulo activo)
+## 3. Licencias
 
-| Fuente | Estado |
-|---|---|
-| S03: Intersecciones semaforizadas | Planificada (movilidad) |
-| S04: Recuperación malla vial | Planificada (infraestructura vial) |
-| S05: Puntos de Ventanilla Única | Referencia de acceso ciudadano |
-
-## 7. Licencias
-
-- Los conjuntos se publican como **CC-BY** en el catálogo de datos abiertos.
-- Atribución: Alcaldía de Santiago de Cali / dependencia responsable.
-- La licencia del código se documenta por separado en `LICENSE`.
+- Datos: **CC-BY**, Alcaldía de Santiago de Cali / dependencia responsable.
+- Código: **MIT** (ver `LICENSE`).
+- La licencia de los datos no cubre el código ni viceversa.

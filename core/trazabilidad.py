@@ -95,7 +95,7 @@ def generar_resumen_metodologico() -> str:
     """Genera resumen metodológico para documentación."""
     return """
 Resumen metodológico:
-- Fuentes: PQR (17,642 registros) y Alumbrado público (248 registros)
+- Fuentes: PQR (17,642 registros) y Alumbrado público (247 registros de 2017)
 - Fecha de consulta: 2026-10-19
 - Criterio de comparación: Comuna + Período (mes/año)
 - Nivel de confianza: MEDIO

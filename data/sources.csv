@@ -1,6 +1,7 @@
 source_id,dataset_name,url,fecha_consulta,periodo,filas_de_datos,filas_usadas,licencia,notas
-S01,Cantidad de PQR por comuna,https://datos.cali.gov.co/dataset/de6fa620-eda6-47c8-97ae-bcbbed493fe1,2026-10-19,2024-2025,17642,17642,CC-BY,"Peticiones, quejas, reclamos y sugerencias por comuna y barrio; sin categoría temática de alumbrado"
-S02,Proyectos de alumbrado público ejecutados en Cali,https://datos.cali.gov.co/dataset/e6a3fd08-6a44-422f-beb7-d21ac1f38ec1,2026-10-19,2017,251,247,CC-BY,"Año tomado del título del archivo; sin fecha por registro; 4 filas sin comuna válida"
+V01,Lesionados en accidentes de tránsito,https://datos.cali.gov.co/dataset/75c089ba-7df3-4816-b80f-c69c6e5362ae,2026-10-17,2016-2025,51236,51236,CC-BY,"Secretaría de Movilidad; 28.411 direcciones resolubles a cruce; 2018-2020 sin dirección"
+A01,Proyectos de alumbrado público ejecutados en Cali,https://datos.cali.gov.co/dataset/e6a3fd08-6a44-422f-beb7-d21ac1f38ec1,2026-10-19,2017,251,247,CC-BY,"Año tomado del título del archivo; sin fecha por registro; 4 filas sin comuna"
+A02,Cantidad de PQR por comuna,https://datos.cali.gov.co/dataset/de6fa620-eda6-47c8-97ae-bcbbed493fe1,2026-10-19,2024-2025,17642,17642,CC-BY,"Sin categoría temática de alumbrado"
 S03,Intersecciones viales semaforizadas de Cali,https://datos.cali.gov.co/dataset/daa6cec4-3fe2-4a5e-8194-91d30c7fcbb3,2026-10-17,2025,519,0,CC-BY,"Complementaria; no usada en el módulo activo"
-S04,Recuperación malla vial urbana discriminada por comuna,https://datos.cali.gov.co/dataset/a68cd30d-3be5-47b8-bb83-c6b85b86a5f6,2026-10-17,No especificado,154,0,CC-BY,"Complementaria; planificada para módulo de malla vial"
-S05,Puntos de Ventanilla Única de la Alcaldía,https://datos.cali.gov.co/dataset/a2120ceb-af52-480f-bf7c-8cad6a333cba,2026-10-17,2025,28,0,CC-BY,"Complementaria; referencia de acceso ciudadano"
+S04,Recuperación malla vial urbana discriminada por comuna,https://datos.cali.gov.co/dataset/a68cd30d-3be5-47b8-bb83-c6b85b86a5f6,2026-10-17,No especificado,154,0,CC-BY,"Complementaria; planificada"
+S05,Puntos de Ventanilla Única de la Alcaldía,https://datos.cali.gov.co/dataset/a2120ceb-af52-480f-bf7c-8cad6a333cba,2026-10-17,2025,28,0,CC-BY,"Complementaria; canal de radicación"
