@@ -1,108 +1,151 @@
-"""Core: Pipeline de datos para CicloRoto."""
-import pandas as pd
+"""Core: pipeline de datos de CicloRoto.
+
+Responsabilidades:
+- Leer los CSV locales sin depender de la red.
+- Normalizar comunas, barrios y fechas de forma verificable.
+- Descargar desde CKAN solo si el archivo local no existe.
+"""
+import io
+import re
 from pathlib import Path
+
+import pandas as pd
 import requests
 
-RAW_DIR = Path("data/raw")
-PROCESSED_DIR = Path("data/processed")
+RAW_DIR = Path(__file__).resolve().parent.parent / 'data' / 'raw'
+PROCESSED_DIR = Path(__file__).resolve().parent.parent / 'data' / 'processed'
+CKAN_API = 'https://datos.cali.gov.co/api/3/action/package_search'
 
-def _leer_csv_inteligente(path: str) -> pd.DataFrame:
-    """Lee CSV detectando encoding automáticamente."""
-    raw = Path(path).read_bytes()
-    for enc in ['utf-8-sig', 'latin-1', 'utf-8']:
+# Rango observado en la fuente PQR. Las fechas fuera de este rango se
+# consideran inválidas y se excluyen de los períodos (ver docs/audit.md).
+ANIO_MIN = 2024
+ANIO_MAX = 2025
+
+
+def leer_csv_local(nombre: str, skiprows: int = 0) -> pd.DataFrame:
+    """Lee un CSV de data/raw detectando encoding y separador.
+
+    No usa la red. Si el archivo no existe, lanza FileNotFoundError.
+    """
+    path = RAW_DIR / nombre
+    if not path.exists():
+        raise FileNotFoundError(
+            f"No existe {path}. Ejecuta la descarga o copia el CSV en data/raw/."
+        )
+
+    raw = path.read_bytes()
+    for enc in ('utf-8-sig', 'latin-1'):
         try:
             txt = raw.decode(enc)
-            sep = ';' if txt.count(';') > txt.count(',') else ','
-            return pd.read_csv(path, encoding=enc, sep=sep, low_memory=False)
-        except (UnicodeDecodeError, Exception):
+        except UnicodeDecodeError:
             continue
-    # Último recurso
-    return pd.read_csv(path, encoding='latin-1', low_memory=False)
+        sep = ';' if txt.count(';') > txt.count(',') else ','
+        return pd.read_csv(
+            io.StringIO(txt), sep=sep, skiprows=skiprows, low_memory=False
+        )
+    raise ValueError(f"No se pudo decodificar {path} con utf-8 ni latin-1")
 
 
-def descargar_csv(url: str, nombre: str, timeout: int = 60) -> pd.DataFrame:
-    """Descarga un CSV desde URL y lo guarda localmente."""
+def descargar_csv(url: str, nombre: str, skiprows: int = 0,
+                  timeout: int = 60) -> pd.DataFrame:
+    """Descarga un CSV a data/raw si no existe y lo devuelve como DataFrame."""
     path = RAW_DIR / nombre
-    if path.exists():
-        return _leer_csv_inteligente(path)
-    
-    r = requests.get(url, timeout=timeout)
-    r.raise_for_status()
-    
-    # Detectar encoding
-    for enc in ['utf-8-sig', 'latin-1']:
-        try:
-            txt = r.content.decode(enc)
-            break
-        except:
-            continue
-    
-    # Detectar separador
-    sep = ';' if txt.count(';') > txt.count(',') else ','
-    
-    # Guardar
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(r.content)
-    
-    return _leer_csv_inteligente(path)
+    if not path.exists():
+        r = requests.get(url, timeout=timeout)
+        r.raise_for_status()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(r.content)
+    return leer_csv_local(nombre, skiprows=skiprows)
 
-def cargar_por_comuna(query: str, nombre: str) -> pd.DataFrame:
-    """Busca un dataset por query y descarga su primer CSV."""
-    r = requests.get('https://datos.cali.gov.co/api/3/action/package_search',
-                     params={'q': query, 'rows': 1}, timeout=30)
-    d = r.json()['result']
-    if not d['count']:
-        raise ValueError(f"No se encontró: {query}")
-    pkg = d['results'][0]
-    for res in pkg.get('resources', []):
+
+def cargar_por_comuna(query: str, nombre: str, skiprows: int = 0) -> pd.DataFrame:
+    """Carga el CSV local; solo consulta CKAN si aún no está descargado.
+
+    Esto permite abrir la aplicación sin conexión, requisito para una
+    demostración reproducible.
+    """
+    if (RAW_DIR / nombre).exists():
+        return leer_csv_local(nombre, skiprows=skiprows)
+
+    r = requests.get(CKAN_API, params={'q': query, 'rows': 1}, timeout=30)
+    r.raise_for_status()
+    d = r.json().get('result', {})
+    if not d.get('count'):
+        raise ValueError(f"No se encontró el conjunto: {query}")
+
+    for res in d['results'][0].get('resources', []):
         if (res.get('format') or '').upper() == 'CSV':
-            return descargar_csv(res['url'], nombre)
-    raise ValueError(f"Sin CSV: {query}")
+            return descargar_csv(res['url'], nombre, skiprows=skiprows)
+    raise ValueError(f"El conjunto no tiene recursos CSV: {query}")
+
 
 def normalizar_comuna(val) -> str:
-    """Normaliza comuna a formato consistente."""
+    """Normaliza cualquier variante a 'Comuna N' (N entre 1 y 22).
+
+    La fuente mezcla 'Comuna 20', 'COMUNA 20' y '20'; sin esta
+    normalización el cruce entre fuentes devuelve cero coincidencias.
+    """
     if pd.isna(val):
         return "N/D"
-    val = str(val).strip()
-    if val.upper() in ('N/D', 'N/A', '', 'NAN'):
+    s = str(val).strip().upper()
+    if s in ('N/D', 'N/A', '', 'NAN', 'NINGUNA', 'SIN DATO'):
         return "N/D"
-    return val
+    m = re.search(r'(\d{1,2})', s)
+    if m:
+        n = int(m.group(1))
+        if 1 <= n <= 22:
+            return f"Comuna {n}"
+    return "N/D"
+
 
 def normalizar_barrio(val) -> str:
-    """Normaliza barrio a mayúsculas."""
+    """Normaliza barrio a mayúsculas y sin espacios repetidos."""
     if pd.isna(val):
         return "N/D"
-    val = str(val).strip().upper()
-    if val in ('N/D', 'N/A', '', 'NAN'):
+    s = re.sub(r'\s+', ' ', str(val).strip().upper())
+    if s in ('N/D', 'N/A', '', 'NAN', 'NINGUNO'):
         return "N/D"
-    return val
+    return s
 
-def parse_fecha_mes(val):
-    """Parsea fechas a período mes/año."""
+
+def parse_fecha_mes(val, anio_min: int = ANIO_MIN,
+                    anio_max: int = ANIO_MAX):
+    """Convierte 'dd/mm/aaaa' o 'ene-24' a 'aaaa-mm'.
+
+    Devuelve None si la fecha no es válida o está fuera del rango
+    documentado. Los formatos no reconocidos se descartan en lugar de
+    inventar un período.
+    """
     if pd.isna(val):
         return None
-    val = str(val).strip()
-    # Formatos comunes: "01/01/2024", "ene-24", "2024-01", "2024"
-    try:
-        # Intentar formato dd/mm/yyyy
-        if '/' in val:
-            parts = val.split('/')
-            if len(parts) == 3:
-                return f"{parts[2]}-{parts[1].zfill(2)}"
-        # Intentar formato mes-año (ene-24)
-        meses = {'ene': '01', 'feb': '02', 'mar': '03', 'abr': '04', 'may': '05', 'jun': '06',
-                 'jul': '07', 'ago': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dic': '12'}
-        for mes_nom, mes_num in meses.items():
-            if val.lower().startswith(mes_nom):
-                parts = val.split('-')
-                if len(parts) == 2:
-                    anio = parts[1]
-                    if len(anio) == 2:
-                        anio = '20' + anio
-                    return f"{anio}-{mes_num}"
-        # Si es solo año
-        if val.isdigit() and len(val) == 4:
-            return f"{val}-01"
-    except:
-        pass
-    return None
+
+    s = str(val).strip()
+    anio = mes = None
+
+    if '/' in s:
+        parts = s.split('/')
+        if len(parts) == 3 and all(p.strip().isdigit() for p in parts):
+            _, mes_txt, anio_txt = (p.strip() for p in parts)
+            anio, mes = int(anio_txt), int(mes_txt)
+    elif '-' in s:
+        partes = s.split('-')
+        if len(partes) == 2:
+            nombres = {
+                'ene': 1, 'feb': 2, 'mar': 3, 'abr': 4, 'may': 5, 'jun': 6,
+                'jul': 7, 'ago': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dic': 12,
+            }
+            clave = partes[0].strip().lower()[:3]
+            if clave in nombres and partes[1].strip().isdigit():
+                mes = nombres[clave]
+                anio_txt = partes[1].strip()
+                anio = int(anio_txt) if len(anio_txt) == 4 else 2000 + int(anio_txt)
+    elif s.isdigit() and len(s) == 4:
+        anio, mes = int(s), 1
+
+    if anio is None or mes is None:
+        return None
+    if not (1 <= mes <= 12):
+        return None
+    if not (anio_min <= anio <= anio_max):
+        return None
+    return f"{anio:04d}-{mes:02d}"

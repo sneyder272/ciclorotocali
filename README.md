@@ -23,18 +23,42 @@ CicloRoto explora estas relaciones utilizando criterios territoriales y temporal
 
 | Módulo | Estado | Funcionalidad |
 |---|---|---|
-| Alumbrado público | Implementado | Analiza la relación entre PQR e intervenciones registradas de alumbrado. |
+| Alumbrado público | Implementado | Diagnostica si los reportes ciudadanos pueden vincularse a proyectos de alumbrado y mide la cobertura de ambas fuentes. |
 | Malla vial | Planificado | Análisis de reportes e intervenciones de infraestructura vial. |
+
+## Resultado del módulo activo
+
+Con las fuentes públicas consultadas, **0 de 17,642 reportes pueden vincularse a una intervención de alumbrado**. No porque las obras no existan, sino porque las fuentes no lo permiten:
+
+| Criterio | Estado |
+|---|---|
+| Clave territorial común | Parcial (normalizable a `Comuna 1`–`Comuna 22`) |
+| Solapamiento temporal | **No** — PQR 2024-01 a 2025-11 frente a alumbrado de 2017 |
+| Fecha por registro en alumbrado | **No** — el año solo aparece en el título del archivo |
+| Categoría temática en PQR | **No** — no hay categoría de alumbrado |
+| Identificador de caso | **No** — ninguna fuente lo publica |
+
+Cifras verificadas (ver [`docs/audit.md`](docs/audit.md)):
+
+| Métrica | Valor |
+|---|---|
+| PQR 2024–2025 | 17,642 (11,873 + 5,741) |
+| Proyectos de alumbrado (2017) | 247 |
+| Puntos luminosos | 3,686 |
+| Inversión registrada | COP 1.862.820.659 |
+| Comunas con proyecto | 12 de 22 |
+| Reportes vinculables | 0 |
 
 ## Metodología y limitaciones
 
-El módulo de alumbrado utiliza información territorial y temporal para explorar relaciones entre reportes e intervenciones.
+El módulo de alumbrado no fuerza un cruce que los datos no soportan: mide la brecha documental y describe la cobertura territorial de cada fuente.
 
-- La comparación se realiza a nivel de comuna o barrio y período, según la disponibilidad de cada fuente.
-- Una PQR sin coincidencia no demuestra que el problema continúe sin resolver.
-- Una coincidencia territorial y temporal no demuestra causalidad ni confirma que una intervención haya resuelto un reporte específico.
-- La cobertura, calidad y consistencia de los registros pueden variar entre años.
-- Los resultados dependen de las fuentes disponibles y de las reglas de normalización y comparación aplicadas.
+- Las comunas se normalizan a `Comuna 1`–`Comuna 22` antes de cualquier comparación.
+- Las fechas fuera de 2024–2025 se marcan como inválidas; no se imputan períodos.
+- El período del alumbrado es el año del título del archivo (2017), no la columna `tipo`.
+- `0 vinculables` significa "no verificable con estas fuentes", no "problema sin resolver".
+- La comparación territorial entre 2024–2025 y 2017 es descriptiva, no causal.
+- Los resultados dependen de las fuentes disponibles y de las reglas de normalización aplicadas.
 
 ## Arquitectura
 
@@ -80,10 +104,10 @@ pip install -r requirements.txt
 ## Ejecución
 
 ```bash
-streamlit run cicloroto/app.py
+python -m streamlit run app.py
 ```
 
-Ajusta el comando si el punto de entrada real de la aplicación es `app.py` en la raíz.
+Los CSV están incluidos en `data/raw/`. La aplicación los lee del disco y **no necesita conexión a internet** para abrirse. Solo consulta CKAN si un archivo local falta.
 
 ## Pruebas
 
@@ -105,8 +129,8 @@ Los conjuntos de datos se consultan en el portal de datos abiertos de Cali:
 
 | ID | Nombre | Enlace directo | Período | Condiciones |
 |---|---|---|---|---|
-| S01 | Cantidad de PQR por comuna | [CKAN](https://datos.cali.gov.co/dataset/de6fa620-eda6-47c8-97ae-bcbbed493fe1) | 2024 | CC-BY |
-| S02 | Proyectos de alumbrado público | [CKAN](https://datos.cali.gov.co/dataset/e6a3fd08-6a44-422f-beb7-d21ac1f38ec1) | 2014-2019 | CC-BY |
+| S01 | Cantidad de PQR por comuna | [CKAN](https://datos.cali.gov.co/dataset/de6fa620-eda6-47c8-97ae-bcbbed493fe1) | 2024-2025 | CC-BY |
+| S02 | Proyectos de alumbrado público | [CKAN](https://datos.cali.gov.co/dataset/e6a3fd08-6a44-422f-beb7-d21ac1f38ec1) | 2017 | CC-BY |
 | S03 | Intersecciones semaforizadas | [CKAN](https://datos.cali.gov.co/dataset/daa6cec4-3fe2-4a5e-8194-91d30c7fcbb3) | 2025 | CC-BY | Complementaria |
 | S04 | Recuperación malla vial | [CKAN](https://datos.cali.gov.co/dataset/a68cd30d-3be5-47b8-bb83-c6b85b86a5f6) | No especificado | CC-BY | Complementaria |
 | S05 | Puntos de Ventanilla Única | [CKAN](https://datos.cali.gov.co/dataset/a2120ceb-af52-480f-bf7c-8cad6a333cba) | 2025 | CC-BY | Complementaria |
@@ -115,7 +139,7 @@ Los conjuntos de datos se consultan en el portal de datos abiertos de Cali:
 
 ## Licencias
 
-- **Código:** Pendiente de definir (recomendado: MIT o Apache 2.0).
+- **Código:** MIT (ver [`LICENSE`](LICENSE)).
 - **Datos:** CC-BY (Creative Commons Attribution). Atribución requerida: Alcaldía de Santiago de Cali / Secretaría correspondiente.
 
 ## Estado del proyecto

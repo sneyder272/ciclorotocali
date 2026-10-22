@@ -1,48 +1,102 @@
-# Registro de Auditoría de Datos — CicloRoto
+# Registro de auditoría de datos — CicloRoto
 
-**Fecha:** 2026-10-19
+**Fecha de consulta:** 2026-10-19
+**Módulo:** Alumbrado público
 
-## Módulo: Alumbrado
+## 1. Descarga
 
-### Descarga
-
-| Fuente | Registros publicados | Registros descargados | Diferencia |
+| Fuente | Líneas del archivo | Filas de datos | Nota |
 |---|---|---|---|
-| S01: PQR por comuna | 17,642 | 17,642 | 0 |
-| S02: Alumbrado público | 253 | 253 | 0 |
+| S01: PQR por comuna | 17,643 | **17,642** | Una línea de encabezado. |
+| S02: Proyectos de alumbrado | 253 | **251** | Una línea de título (`... AÑO 2017`) y una de encabezado. |
 
-### Procesamiento
+## 2. Procesamiento
 
-| Fuente | Registros descargados | Registros procesados | Diferencia | Causa |
+| Fuente | Filas de datos | Filas usadas | Descartadas | Causa |
 |---|---|---|---|---|
-| S01: PQR por comuna | 17,642 | 17,642 | 0 | Todos válidos |
-| S02: Alumbrado público | 253 | 248 | 5 | Filas con datos faltantes en campos clave (comuna/barrio/tipo) |
+| S01: PQR | 17,642 | 17,642 | 0 | Se conservan todas; las fechas inválidas se marcan, no se borran. |
+| S02: Alumbrado | 251 | 247 | 4 | Sin comuna válida (1–22). |
 
-### Causas de descarte (S02: Alumbrado)
+### Detalle de las 4 filas descartadas (S02)
 
-| Causa | Registros |
+| Métrica | Valor |
 |---|---|
-| Comuna vacía o inválida | 3 |
-| Barrio vacío | 1 |
-| Tipo de proyecto no identificable | 1 |
-| **Total descartados** | **5** |
+| Puntos luminosos no contabilizados | 39 |
+| Inversión no contabilizada (COP) | 55.907.038 |
 
-## Justificación temporal
+Las filas se descartan del análisis territorial porque no es posible
+asignarlas a una comuna. No se imputan valores.
 
-- **S01 (PQR):** 2024 (enero-diciembre)
-- **S02 (Alumbrado):** 2014-2019 (agregado por mes/año)
+### Fechas inválidas en S01
 
-**Nota:** La comparación entre PQR (2024) e intervenciones de alumbrado (2014-2019) tiene una **desalineación temporal**. La trazabilidad calculada identifica coincidencias territoriales y temporales, pero la diferencia de períodos limita la interpretación causal. Los resultados deben leerse como "ausencia de intervención vinculada en las fuentes consultadas", no como "problema sin resolver".
-
-## Fuentes complementarias (no usadas en módulo activo)
-
-| Fuente | Motivo de conservación |
+| Situación | Registros |
 |---|---|
-| S03: Intersecciones semaforizadas | Módulo planificado (movilidad) |
-| S04: Recuperación malla vial | Módulo planificado (infraestructura vial) |
-| S05: Ventanilla Única | Referencia de acceso ciudadano |
+| Sin fecha | 17 |
+| Año fuera de 2024–2025 (2005, 2026, 2027, 2028, 2205) | 11 |
+| **Total sin período válido** | **28** |
 
-## Licencias
+Estos 28 registros permanecen en el conteo total (17,642) pero no entran en
+los agregados por período.
 
-- Todos los datasets: **CC-BY** (Creative Commons Attribution)
-- Requisito: Atribuir la fuente original (Alcaldía de Santiago de Cali / Secretaría correspondiente)
+### Comunas sin dato en S01
+
+| Situación | Registros | Porcentaje |
+|---|---|---|
+| Comuna `N/D` | 2,673 | 15.1% |
+
+Las variantes `Comuna 20`, `COMUNA 20` y `20` se normalizan a `Comuna 20`.
+Sin esa normalización la fuente reporta 83 valores distintos; tras normalizar
+quedan 22 comunas y `N/D`.
+
+## 3. Cifras verificadas
+
+| Métrica | Valor |
+|---|---|
+| PQR totales | 17,642 |
+| PQR de 2024 | 11,873 |
+| PQR de 2025 | 5,741 |
+| Proyectos de alumbrado (2017) | 247 |
+| Puntos luminosos registrados | 3,686 |
+| Inversión registrada (COP) | 1.862.820.659 |
+| Comunas con proyecto en 2017 | 12 de 22 |
+| Reportes vinculables a una obra | **0** |
+
+## 4. Por qué el cruce no es posible
+
+| Criterio | Estado | Detalle |
+|---|---|---|
+| Clave territorial común | Parcial | Normalizable a `Comuna 1`–`Comuna 22`; no hay clave de caso. |
+| Solapamiento temporal | **No** | PQR 2024-01 a 2025-11; alumbrado 2017. Meses en común: 0. |
+| Fecha por registro en alumbrado | **No** | El año solo aparece en el título del archivo. |
+| Categoría temática en PQR | **No** | Las clases son `Pqr`, `Cita médica`, `Denuncia`, `Urgencias`, etc. Ninguna identifica alumbrado. |
+| Identificador de caso | **No** | Ninguna fuente publica un número de caso. |
+
+**Conclusión:** `0 reportes vinculables` significa que la vinculación **no es
+verificable con las fuentes públicas consultadas**. No significa que las obras
+no existan ni que los reportes no hayan sido atendidos.
+
+## 5. Corrección respecto a versiones anteriores
+
+La primera versión del módulo calculaba el período del alumbrado a partir de
+la columna `tipo` (valores `VIAS`, `CPL`, `ZONA VERDE`, etc.). Esa columna no
+contiene fechas: todas las filas quedaban sin período y el agrupamiento las
+descartaba, produciendo cifras de "brecha" que eran un artefacto del código.
+También se afirmaba que el alumbrado cubría 2014–2019; el archivo corresponde
+a **2017**, según su título.
+
+Las cifras de esta versión reemplazan a las anteriores (748 brechas y 17,625
+reportes sin intervención), que no deben usarse.
+
+## 6. Fuentes complementarias (no usadas en el módulo activo)
+
+| Fuente | Estado |
+|---|---|
+| S03: Intersecciones semaforizadas | Planificada (movilidad) |
+| S04: Recuperación malla vial | Planificada (infraestructura vial) |
+| S05: Puntos de Ventanilla Única | Referencia de acceso ciudadano |
+
+## 7. Licencias
+
+- Los conjuntos se publican como **CC-BY** en el catálogo de datos abiertos.
+- Atribución: Alcaldía de Santiago de Cali / dependencia responsable.
+- La licencia del código se documenta por separado en `LICENSE`.
