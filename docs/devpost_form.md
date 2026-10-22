@@ -97,15 +97,11 @@ Paste the YouTube URL after recording. The script, narration, and cover are in
 ## Additional info — What is the specific problem, and how do you know it's real?
 
 ```text
-The specific problem: in Cali, a resident can suspect that a corner is dangerous, but cannot verify whether the city has intervened there. The city publishes road-injury records with free-text addresses, public-lighting projects by commune and year, and citizen requests without a lighting category or case ID. The datasets cannot be joined at the case or address level.
-
-How we know it is real (public data, not assumptions):
-- 51,236 injury records (2016–2025) from the Secretaría de Movilidad. Only 28,411 (55.5%) have an address that resolves to an intersection; 2018–2020 have "." in 100% of rows (16,616 records).
-- 247 public-lighting projects (2017) and 17,642 PQR (2024–2025). They share no case ID, the lighting file has no per-record date, and the periods do not overlap. Cross-matching yields 0 linkable records.
-- The most critical intersection, Calle 70 con Carrera 8, has 148 injury records.
-
-We did not conduct interviews or field validation that we cannot demonstrate. The evidence is the open data itself, its coverage, and its gaps. That is why the tool does not claim a project is missing; it shows that the link is not verifiable with what is published.
+A resident can see a dangerous corner in Cali but cannot verify whether the city intervened there. Of 51,236 public injury records, only 55.5% have a usable address; 0 of 17,642 citizen reports can be linked to the 247 public-lighting works.
 ```
+
+**241 / 255 characters.** No line breaks. The full evidence, methodology, and
+caveats are in the Project Story above; this field is only a summary.
 
 ## Team email
 
