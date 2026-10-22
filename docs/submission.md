@@ -10,6 +10,20 @@ Convierte 51,236 siniestros viales de Cali en un ranking de cruces críticos y e
 una solicitud lista para radicar. Y muestra, sin inventar, qué no se puede
 verificar con los datos públicos.
 
+## Cómo pegarlo en Devpost
+
+| Campo | Contenido |
+|---|---|
+| **Project name** | CicloRoto Vial |
+| **Elevator pitch** | Convierte 51,236 siniestros viales de Cali en un ranking de cruces críticos y una solicitud lista para radicar. Y muestra, sin inventar, qué no se puede verificar con los datos públicos. |
+| **Built with** | Python, pandas, NumPy, Streamlit, pytest, Git, GitHub |
+| **Try it out** | https://github.com/sneyder272/ciclorotocali |
+| **Video** | Pegar el enlace de YouTube (2–6 min) |
+| **Full description** | Copiar desde “El problema y cómo sabemos que es real” hasta “Nota de honestidad” |
+
+**Importante:** el video debe mostrar la app funcionando. El guion está en
+`docs/video_script.md` y dura 4:30–5:00.
+
 ## El problema y cómo sabemos que es real
 
 **El problema:** en Cali, un vecino puede saber que su esquina es peligrosa,

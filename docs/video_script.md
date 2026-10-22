@@ -24,8 +24,8 @@
 **Pantalla:** título de la app, luego la tabla de cruces críticos.
 
 > En Cali se registraron **51,236 siniestros con lesionados** entre 2016 y 2025.
-> La ciudad publica la dirección de cada uno, pero no publica si intervino en
-> esa esquina.
+> La ciudad publica la dirección de cada uno, aunque solo el **55 %** se puede
+> ubicar en un cruce. Y no publica si intervino en esa esquina.
 >
 > CicloRoto Vial convierte esos datos en un ranking de cruces críticos y en una
 > ficha con la solicitud lista para radicar.
@@ -57,16 +57,17 @@
 ## 1:45 – 3:15 · Demo: buscar mi esquina
 
 **Pantalla:** pestaña **Buscar mi esquina**. Escribir despacio
-`calle 70 con carrera 8`. Mostrar el resultado. Bajar al gráfico por hora.
+`CL 70 & CRA 8`. Mostrar el resultado. Bajar al gráfico por hora.
 Abrir el expander **Ficha y solicitud lista para radicar**.
 
-> Voy a buscar mi esquina. Escribo “calle 70 con carrera 8”. La app la reconoce
-> aunque la escriba como “CL 70 & CRA 8”.
+> Voy a buscar mi esquina. Escribo “CL 70 & CRA 8”. La app la reconoce y la
+> convierte en **“CALLE 70 CON CARRERA 8”**: la misma esquina, escrita de otra
+> forma.
 >
-> Es el cruce más crítico: **148 siniestros con lesionados**. Cuarenta y uno por
-> ciento involucra motocicleta; trece por ciento, peatón. La ventana con más
-> casos es de **4 a 7 de la tarde**. Debajo está el detalle por hora y los años
-> con dato.
+> Es el cruce más crítico: **148 siniestros con lesionados** en los años con
+> dirección utilizable. Cuarenta y uno por ciento involucra motocicleta; trece
+> por ciento, peatón. La ventana con más casos es de **4 a 7 de la tarde**.
+> Debajo está el detalle por hora y los años con dato.
 >
 > Ahora abro la ficha. Incluye los indicadores y una advertencia: **no puedo
 > afirmar que falte una obra**. Lo que sí puedo hacer es pedir la información.
