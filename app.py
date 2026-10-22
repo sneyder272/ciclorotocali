@@ -91,6 +91,15 @@ with tab1:
             help="Sube el mínimo para excluir cruces con muy pocos casos.",
         )
 
+    with st.expander("¿Cómo leer esta tabla?"):
+        st.markdown(
+            "Cada fila es un cruce. **Registros** es cuántos siniestros con "
+            "lesionados ocurrieron allí. **Tasa ajustada** estabiliza los "
+            "cruces con pocos casos para que no parezcan los peores solo por "
+            "azar. **IC 95%** es el rango donde probablemente está la tasa "
+            "real. Un registro es un siniestro, no una persona."
+        )
+
     p = panel_vial(
         vial,
         min_registros=min_reg,
