@@ -1,5 +1,9 @@
 # Postulación — Neighborhood Hacks 2026
 
+> **Para el formulario real de Devpost usa [`docs/devpost_form.md`](devpost_form.md)**:
+> texto final en inglés, campo por campo. Este documento es la versión de
+> trabajo en español.
+
 ## Título
 
 **CicloRoto Vial — De la queja a la prioridad**
