@@ -17,6 +17,11 @@
 - [ ] Grabar audio aparte o con micrófono, no con el altavoz.
 - [ ] Revisar que no aparezca ningún nombre, cédula ni correo real.
 
+**Si no quieres hablar:** la narración ya está generada con voz sintética en
+`video_cicloroto/` (dos voces, cortes por escena). Instrucciones de montaje en
+`video_cicloroto/LEEME.md` y transcripción en `docs/transcript.md`. Agrega el
+rótulo **“Narración con IA”** y dilo en la descripción de la submission.
+
 ---
 
 ## 0:00 – 0:25 · Gancho

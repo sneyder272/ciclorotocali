@@ -164,6 +164,10 @@ La asistencia de IA se usó para exploración, redacción y revisión de código
 Todas las cifras se calculan desde los CSV locales y se verifican con `pytest`;
 no se inventaron datos, fuentes, entrevistas ni validaciones.
 
+La **narración del video** se genera con `edge-tts` (voz sintética en español
+colombiano) y se identifica como tal en el video y en la descripción. La
+grabación de pantalla es real: no se simuló el funcionamiento de la app.
+
 ## Nota de honestidad
 
 El ranking **no** prueba que falte una obra ni que una intervención haya
